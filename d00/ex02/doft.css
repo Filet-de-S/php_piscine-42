@@ -1,0 +1,126 @@
+html, body { background-color: rgb(80, 80, 80); }
+
+* { width: 100%; margin: auto; box-sizing: border-box; }
+
+#h1 {
+	background-color:  rgb(144,144,144);
+	width: 75%;
+	padding: 0.5%; box-sizing: border-box;
+	margin-top: 1%;
+	margin-bottom: 1%; 
+	border-radius: 9px;
+	box-shadow: 9px 9px 10px black;
+}
+
+#lupa {
+	width: 13.5%;
+	float: right;
+	margin-left: 37%;
+	position: absolute;
+}
+
+#links { 
+	list-style-type: none;
+	float: right;
+	width: 3%;
+}
+
+#rel { width: 50%; margin: 0% 45%; display: block; }
+
+#close { width: 50%; margin: 45%; margin-top: 172%; display: block; }
+
+#h1h { width: 30%; }
+
+#ikea {
+	position: relative;
+	width: 12%;
+	margin: -20% 33%;
+	float: left;
+	border: 1px solid red;
+	background-image: url(resources/brick.jpg);
+	opacity: 0;
+}
+
+#apple {
+	position: relative;
+	width: 18.9%;
+	margin: -24.5% 3%;
+	float: right;
+	border: 1px solid red;
+	background-image: url(resources/brick.jpg);
+	opacity: 0;
+}
+
+.main { width: 72%; }
+
+.side { 
+	width: 10%; 
+	float: left;
+	border-radius: 9px;
+	box-shadow: 9px 9px 10px black;
+	background-color: rgb(144,144,144);
+}
+.side img {
+	width: 50%;
+	display: block;
+	margin-top: 8%;
+}
+
+.center {
+	width: 75%;
+	float: left;
+	margin-left: 2.4%; 
+	margin-right: 2.4%; 
+	border-radius: 9px;
+	box-shadow: 9px 9px 10px black;
+	background-color: rgb(144,144,144);
+}
+.center img { width:100%; padding: 1%; }
+
+#eyelook { border: 6px solid rgb(255, 0, 0); border-radius: 6px; 
+	box-sizing: unset; }
+
+#brick {
+	width: 85%;
+	background-image: url(resources/brick.jpg);
+	background-repeat: repeat;
+	background-size: 26%;
+}
+
+#non {
+	width: 58%;
+	visibility: hidden;
+}
+
+.entrez {
+	width: 27.5%;
+	border-radius: 9px;
+	background-color: rgb(64, 255, 102);
+	background-color: rgb(120, 255, 130);
+	box-shadow: 9px 9px 10px black;
+	display: inline-block;
+	margin: -76%;
+	margin-top: 27%;
+	padding: 0.5%;
+}
+
+#ent { font-size: 1.6vw; font-family: Georgia;  letter-spacing: 2px;}
+#norm { font-size: 0.85vw; font-family: Verdana; }
+
+#text { 
+	width: 77%;
+	margin-top: 1%;
+	padding: 0.7%;
+	margin-right: 0.8%;
+	margin-bottom: 10%;
+	box-shadow: -0.5px -0.5px black;
+}
+
+#repon {
+	width: 16%;
+	display: inline-block;
+	font-size: 0.9em;
+	background-color: rgb(236, 236, 236);
+	box-shadow: 0.5px 0.5px black;
+	text-shadow: 0.1px 1px 60px gainsboro;
+}

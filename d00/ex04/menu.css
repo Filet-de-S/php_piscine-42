@@ -1,0 +1,29 @@
+body {
+    background-color: rgba(247, 247, 130, 0.31);
+}
+
+
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+.menu {
+    width: 10%;
+    background-color: aliceblue;
+    position: relative;
+    display: inline-block;
+}
+
+.sal-cont {
+    position: absolute;
+    background-color: #dddddd;
+    text-align: center;
+    display: none;
+}
+
+
+.menu:hover .sal-cont{
+    display: block;
+  }
