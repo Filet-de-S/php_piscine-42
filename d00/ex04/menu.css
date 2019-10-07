@@ -1,22 +1,25 @@
 body {
     background-color: rgba(247, 247, 130, 0.31);
     margin: auto;
+    font-size: 1.3vw;
 
 }
 
 .menu {
     width: 10%;
-    background-color: aliceblue;
+    background-color: rgb(11, 2, 1);
     position: relative;
     display: inline-block;
     text-align: center;
     color: rgb(136, 134, 134);
-    margin: 1%;
+    margin: 0%;
+    font-weight: bold;
+
 }
 
-.sal-cont {
+.sal-cont { 
     position: absolute;
-    background-color: #ebc18d;
+    background-color: #f4942dd4;
     text-align: center;
     display: none;
     color: rgb(46, 63, 96);
@@ -37,5 +40,4 @@ p:hover {
 .menu:hover {
     background-color: #4CAF50;
     color: white;
-    
 }
