@@ -12,9 +12,9 @@ function ft_split($str)
     return ($r);
 }
 
-function ft_sort($a)
+function ft_sort(&$a)
 {
-    
+    natcasesort($a);
 }
 
 $a = $argv;
