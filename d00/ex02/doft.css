@@ -119,8 +119,9 @@ html, body { background-color: rgb(80, 80, 80); }
 #repon {
 	width: 16%;
 	display: inline-block;
-	font-size: 0.9em;
+	font-size: 0.8vw;
 	background-color: rgb(236, 236, 236);
 	box-shadow: 0.5px 0.5px black;
 	text-shadow: 0.1px 1px 60px gainsboro;
+	text-align: center;
 }
