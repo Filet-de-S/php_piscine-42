@@ -33,10 +33,16 @@ function stroid_cmp($a, $b)
 
     $oa = ord($a[$i]);
     $ob = ord($b[$i]);
-    if (($da = ctype_digit($a[$i])) || ($db = ctype_digit($b[$i])))
-        return ($da == $db ? ($oa - $ob) : ($da == 1 ? 1 : -1));
-    if (($da = ctype_punct($a[$i])) || ($db = ctype_punct($b[$i])))
+
+    $da = ctype_punct($a[$i]);
+    $db = ctype_punct($b[$i]);
+    if ($da || $db)
        return ($da == $db ? ($oa - $ob) : ($da == 1 ? 1 : -1));
+
+    $da = ctype_digit($a[$i]);
+    $db = ctype_digit($b[$i]);
+    if ($da || $db)
+        return ($da == $db ? ($oa - $ob) : ($da == 1 ? 1 : -1));
 
     if (($oa > 64 && $oa < 91) && ($ob > 96 && $ob < 123))
         return ($oa - ($ob - 32));
@@ -45,26 +51,37 @@ function stroid_cmp($a, $b)
     return ($oa - $ob);
 }
 
-function ft_sort(&$a)
+function ft_sort($a)
 {
+    if (!$a)
+        return (NULL);
     foreach ($a as $value)
     {
         if (is_numeric($value))
-            $nums[] = $value; //sort nums then
-        elseif (ctype_alpha($value[0]))
-            $words[] = $value;
-        else
+            $nums[] = $value;
+        elseif (ctype_punct($value[0]))
             $symbols[] = $value;
+        else
+            $words[] = $value;
+    }
+
+    if ($words)
+    {
+        usort($words, 'stroid_cmp');
+        $fin[] = array_merge($words);
     }
     if ($nums)
-        usort($nums, 'strcmp');
-    print_r($nums);
-    if ($words)
-        usort($words, 'stroid_cmp');
-    print_r($words);
+    {
+        usort($nums, 'stroid_cmp');
+        $fin[] = array_merge($nums);
+    }
     if ($symbols)
+    {
         usort($symbols, 'stroid_cmp');
-    print_r($symbols);
+        $fin[] = array_merge($symbols);
+    }
+    $fin = call_user_func_array('array_merge', $fin);
+    return ($fin);
 }
 
 $a = $argv;
@@ -72,27 +89,11 @@ array_shift($a);
 
 $a = implode(" ", $a);
 $a = ft_split($a);
-
-ft_sort($a);
-
-/*
-AhAhAh
-A2l+
-toto
-tutu
-XXX
-1948372 
-4234
-##
-_hop
-
-$a = implode("\n", $a);
-
-if (($value[$j] > 64 && $value[$j] < 91) || 
-                    ($value[$j] > 96 && $value[$j] < 123))
-
-            for ($i = 0, $j = strlen($value); $i < $j; $i++)
-
-*/
-
+$s = ft_sort($a);
+if ($s)
+{
+    $s = implode("\n", $s);
+    print_r($s);
+    echo "\n";
+}
 ?>
