@@ -1,6 +1,5 @@
 #!/usr/bin/php
 <?php
-
 function ft_split($str)
 {
     if (!$str)
@@ -10,5 +9,4 @@ function ft_split($str)
     sort($r);
     return ($r);
 }
-
 ?>
