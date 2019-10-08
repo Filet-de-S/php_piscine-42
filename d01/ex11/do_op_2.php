@@ -9,7 +9,6 @@ if ($argc != 2)
 
 $a = $argv[1];
 $a = trim($a, " \t");
-print_r("$a \n\n");
 $i = 0;
 $j = strlen($a);
 for (; $i < $j; $i++)
@@ -25,9 +24,8 @@ for (; $i < $j; $i++)
 $del = NULL;
 for (; $i < $j; $i++)
 {
-	echo (".{$a[$i]}.\n");
-	if ($a[$i] != '%' || $a[$i] != '*' || $a[$i] != '+' || $a[$i] != '/' ||
-	$a[$i] != '-' || $a[$i] != " ")
+	if ($a[$i] != "%" && $a[$i] != "*" && $a[$i] != "+" && $a[$i] != "/" &&
+	$a[$i] != "-" && $a[$i] != " ")
 	{
 		echo "Syntax Error\n";
 		exit;
@@ -35,9 +33,12 @@ for (; $i < $j; $i++)
 	elseif ($a[$i] == " " && !$del)
 		continue;
 	elseif (!$del)
+	{
 		$del = $a[$i];
+		$i++;
+		break;
+	}
 }
-print_r("AOASDK");
 while ($a[$i] == " ")
 		$i++;
 for (; $i < $j; $i++)
@@ -53,9 +54,6 @@ for (; $i < $j; $i++)
 		exit;
 	}	
 }
-
-print_r($a);
-
 
 if ($del == '+')
 	$fin = $d1 + $d2;
