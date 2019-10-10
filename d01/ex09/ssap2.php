@@ -8,7 +8,12 @@ function ft_split($str)
     if (!$str)
         return (NULL);
     $r = explode(" ", $str);
-    $r = array_filter($r);
+    foreach ($r as $k=>$v)
+    {
+        if ($v === NULL)
+            continue;
+        $arr[] = $v;
+    }
     return ($r);
 }
 
