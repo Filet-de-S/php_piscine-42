@@ -29,7 +29,18 @@ if ($argc == 2)
         elseif ($a[2] == "octobre") $a[2] = 10;
         elseif ($a[2] == "novembre") $a[2] = 11;
         else $a[2] = 12;
-        if (($fin = strtotime("{$a[1]}.{$a[2]}.{$a[3]} $a[4]")) == FALSE)
+
+        $a[0] = strtolower($a[0]);
+        if ($a[0] == "lundi") $a[0] = 1;
+        elseif ($a[0] == "mardi") $a[0] = 2;
+        elseif ($a[0] == "mercredi") $a[0] = 3;
+        elseif ($a[0] == "jeudi") $a[0] = 4;
+        elseif ($a[0] == "vendredi") $a[0] = 5;
+        elseif ($a[0] == "samedi") $a[0] = 6;
+        else $a[0] = 7;
+
+        if (($fin = strtotime("{$a[1]}.{$a[2]}.{$a[3]} $a[4]")) == FALSE ||
+        date('N', $fin) != $a[0])
             echo "Wrong Format\n";
         else echo $fin."\n";
     }

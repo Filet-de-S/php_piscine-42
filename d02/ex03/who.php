@@ -1,39 +1,48 @@
 #!/usr/bin/php
 <?php
-$s = file_get_contents('/var/run/utmpx');
-$a = unpack("ut_line[16]", "$s");
-print_r("$a \n");
+date_default_timezone_set("Europe/Moscow");
+$file = "/var/run/utmpx";
+$fd = fopen($file, "r");
+$res = fread($fd, 1256);
+
+$fl = 1;
+$fin = NULL;
+$res = 1;
+while ($res != NULL)
+{
+    if (($user = fread($fd, 256)) == NULL) break;
+    $user = unpack('a256', $user);
+    $tmp = str_pad(trim($user[1]), 9, " ", STR_PAD_RIGHT);
+    $res = fread($fd, 4);
+    $id = fread($fd, 32);
+    $tmp .= str_pad(trim($id), 9, " ", STR_PAD_RIGHT);
+    $res = fread($fd, 4);
+    if (($res = fread($fd, 4)) == NULL) break;
+    $us = unpack('i', $res);
+    if ($us[1] != 7)
+        $fl = -1; // 7 ==  user process (alive)
+    if (($res = fread($fd, 4)) == NULL) break;
+    $in = unpack('i', $res);
+    $tim = date('M j H:i', $in[1]);
+    $tmp .= $tim;
+    $res = fread($fd, 4);
+    $res = fread($fd, 256);
+    $res = fread($fd, 64);
+    if ($fl != 1)
+        continue;
+    if ($fin == NULL)
+        $fin = $tmp;
+    else
+        $fin .= "\n$tmp";
+    $fl = 1;
+}
+print_r("$fin \n");
+fclose($fd);
 
 /*
-login name,
-terminal line,
-login time,
-remote hostname or X display.
-*/
-/*
+628 bytes
 
-000004e0: 0000 0000 0000 0000 6b6b 6174 656c 796e  ........kkatelyn
-000004f0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-*
-000005e0: 0000 0000 0000 0000 2f00 0101 636f 6e73  ......../...cons
-000005f0: 6f6c 6500 0000 0000 0000 0000 0000 0000  ole.............
-00000600: 0000 0000 0000 0000 0000 0000 9cf4 0000  ................
-00000610: 0700 0000 7191 9d5d a174 0000 0000 0000  ....q..].t......
-                    
-000009d0: 6b6b 6174 656c 796e 0000 0000 0000 0000  kkatelyn........
-000009e0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-*
-00000ad0: 7330 3031 7474 7973 3030 3100 0000 0000  s001ttys001.....
-00000ae0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000af0: 0000 0000 352b 0000 0700 0000 36e1 9d5d  ....5+......6..]
-00000b00: 4185 0b00 0000 0000 0000 0000 0000 0000  A...............
-
-00000c40: 0000 0000 6b6b 6174 656c 796e 0000 0000  ....kkatelyn....
-00000c50: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-*
-00000d40: 0000 0000 7330 3032 7474 7973 3030 3200  ....s002ttys002.
-00000d50: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000d60: 0000 0000 0000 0000 382b 0000 0700 0000  ........8+......
-00000d70: 36e1 9d5d 4285 0b00 0000 0000 0000 0000  6..]B./.........
+https://github.com/libyal/dtformats/blob/master/documentation/Utmp%20login%20records%20format.asciidoc
 */
+
 ?>
