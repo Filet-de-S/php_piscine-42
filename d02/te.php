@@ -1,11 +1,8 @@
 #!/usr/bin/env php
 <?php
-$s = file_get_contents($argv[1]);
-preg_match_all('/<(img|IMG) .*(((src|SRC)\s*=".+"(\s*(alt|ALT)\s*=".+")?)|((\s*(alt|ALT)\s*=".+")?(src|SRC)\s*=".+"))\s*>/', $s, $fin);
 
-print_r($fin);
+if (preg_match('/^((http|https)|(HTTP|HTTPS))/', "https://www.42.fr/wp-content/themes/42/images/42_logo_black.svg") == 1)
+    echo "ok";
+
 
 ?>
-
-
-preg_match_all('/<(img|IMG) .*(src|SRC)\s*=".+"(\s*(alt|ALT)\s*=".+")?\s*>/', $parseme, $fin);
