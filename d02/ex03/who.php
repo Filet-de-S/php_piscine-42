@@ -12,10 +12,10 @@ while ($res != NULL)
 {
     if (($user = fread($fd, 256)) == NULL) break;
     $user = unpack('a256', $user);
-    $tmp = str_pad(trim($user[1]), 9, " ", STR_PAD_RIGHT);
+    $tmp = str_pad(trim($user[1]), 8, " ", STR_PAD_RIGHT);
     $res = fread($fd, 4);
     $id = fread($fd, 32);
-    $tmp .= str_pad(trim($id), 9, " ", STR_PAD_RIGHT);
+    $tmp .= " ".str_pad(trim($id), 8, " ", STR_PAD_RIGHT)." ";
     $res = fread($fd, 4);
     if (($res = fread($fd, 4)) == NULL) break;
     $us = unpack('i', $res);

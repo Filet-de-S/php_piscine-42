@@ -11,19 +11,21 @@ preg_match_all('/<(img|IMG) .*(((src|SRC)\s*=".+"(\s*(alt|ALT)\s*=".+")?)|((\s*(
 for ($i = 0, $j = count($fin[0]); $i < $j; $i++)
     $new[] = $fin[0][$i];
 $dir = preg_replace('/(\s*)((http|https)|(HTTP|HTTPS)):\/\//', "", $a);
-
+$dir = preg_replace('|/$|', "", $dir);
+if (substr($a, -1) != '/')
+    $a .= "/";
 for($i = 0, $j = count($new); $i < $j; $i++)
 {
     $new[$i] = preg_replace('/^<(img|IMG)(\s*)(SRC|src)(\s*)="/', "", $new[$i]);
     $new[$i] = preg_replace('/"(\s*)(ALT|alt)(.*)>$/', "", $new[$i]);
     if (preg_match('/^((http|https)|(HTTP|HTTPS))/', $new[$i]) == 1)
     {
-        echo $new[$i]."\n";
         if (is_dir($dir) == FALSE)
             mkdir("$dir");
         $name = preg_replace('/(.*)\//', "", $new[$i]);
         $file = fopen("{$dir}/{$name}", "w");
-        $web = stream_copy_to_stream($new[$i], $file);
+        $web = fopen($new[$i], 'r');
+        stream_copy_to_stream($web, $file);
         fclose($file);
         fclose($web);
     }
@@ -33,22 +35,12 @@ for($i = 0, $j = count($new); $i < $j; $i++)
             mkdir("$dir");
         $name = preg_replace('/(.*)\//', "", $new[$i]);
         $file = fopen("{$dir}/{$name}", "w");
+        if (substr($new[$i], -1) == '/')
+            $mew[$i] = preg_replace('|/$|', "", $new[$i]);
+        $web = fopen($a.$new[$i], 'r');
+        stream_copy_to_stream($web, $file);
+        fclose($file);
+        fclose($web);
     }
 }
-
-print_r($new);
-
-/*
-$> ./photos.php "http://www.42.fr"
-$> ls
-photos.php
-www.42.fr/
-$> ls www.42.fr/
-logo42-site.gif
-
-
-file_get_contents
-file_put_contents
-
-*/
 ?>
