@@ -12,8 +12,8 @@ for ($i = 0, $j = count($fin[0]); $i < $j; $i++)
     $new[] = $fin[0][$i];
 print_r($new);
 
-$new[0] = preg_filter("|(.*/)?|", "", $new[0]);
-$new[1] = preg_filter("|(.*/)?|", "", $new[1]);
+$new[0] = preg_replace("|(.*/)?|", "", $new[0]);
+$new[1] = preg_replace("|(.*/)?|", "", $new[1]);
 
 var_dump($new[0]);
 
