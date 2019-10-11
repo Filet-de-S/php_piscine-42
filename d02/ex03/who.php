@@ -10,6 +10,7 @@ $fin = NULL;
 $res = 1;
 while ($res != NULL)
 {
+    $fl = 1;
     if (($user = fread($fd, 256)) == NULL) break;
     $user = unpack('a256', $user);
     $tmp = str_pad(trim($user[1]), 8, " ", STR_PAD_RIGHT);
@@ -34,7 +35,7 @@ while ($res != NULL)
         $fin = $tmp;
     else
         $fin .= "\n$tmp";
-    $fl = 1;
+
 }
 print_r("$fin \n");
 fclose($fd);
