@@ -35,7 +35,6 @@ while ($res != NULL)
         $fin = $tmp;
     else
         $fin .= "\n$tmp";
-
 }
 print_r("$fin \n");
 fclose($fd);
