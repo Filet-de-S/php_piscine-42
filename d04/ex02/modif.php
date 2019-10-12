@@ -8,8 +8,7 @@ $sub = $_POST[submit];
 $dir = "../private";
 $fpw = "/passwd";
 
-if ($sub !== "OK" || $oldpw === "" || $newpw === "" || $name === "" ||
-	file_exists($dir) === FALSE || file_exists($dir.$fpw) === FALSE)
+if ($sub !== "OK" || $oldpw === "" || $newpw === "" || $name === "") //|| file_exists($dir) === FALSE || file_exists($dir.$fpw) === FALSE)
 	echo "ERROR\n";
 else
 {
