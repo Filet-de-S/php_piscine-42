@@ -1,0 +1,2 @@
+SELECT UPPER(last_name) as 'NAME', first_name, price FROM `user_card` JOIN `member` JOIN subscription ON (`user_card`.id_user = `member`.id_user_card AND
+`member`.id_sub = subscription.id_sub AND subscription.price > 42) ORDER BY last_name ASC, first_name ASC;
