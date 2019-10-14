@@ -1,0 +1,109 @@
+–– DB: 
+	+us:pw
+	+products => 
+		tovar =>
+
+				available: 1 or 0
+				price => 50 u.e (*1.2)
+				review
+				time to execute
+				category
+					(TIR) => 0, 1, 2
+					(vetki) => web, unix, algo, graph, devops
+					(others) => slots, nights checks, TIJ rockirovka
+					(complex)
+		cat => 
+				tovars;
+			
+
+	+admin:
+		products ordered;
+		modifying categories & products: 
+			
+			FORM
+				new cat;
+				please add products;
+			
+
+–– Basket: [cache]
+		validate order.
+		$_SESSION[user][basket] => products = 8 (check for available)
+
+–– +CAPTCHA
+–– +oAUTH
+–– +search
+
+PRINT cat
+
+	foreach ($dbTOVARS as $prod)
+		$print.cat .= $prod[categories]."\n";
+	
+	
+	if ($method.silka.click)
+		cat.php
+		$cat = unix;
+		foreach ($dbTOVARS as $prod)
+		{
+			if ($prod[cat] == "UNIX")
+			{<div> 
+			<h3><?=$prod[title]?></h3>
+			<img src='<?=$prod[img];?>'>
+			</div>
+			}
+		}
+
+
+	array{
+		[0] = {
+			name =>
+			cat =>
+			price =>
+			img =>
+			......
+		}
+	}
+
+
+tovar (id, name, price)...
+category(name, creation, date)...
+tovar_category(tovar_id, category_id)
+
+SELECT * FROM
+tovar_category
+INNER JOIN
+tovar
+on tovar.id = tovar_id
+WHERE category_id = "iskomiy id"
+
+
+
+
+id = tovar#1 => cat1, cat2
+			=>
+
+
+[ 
+	cat1 = tovar#1
+
+]
+
+
+
+tovar	categories:
+	unix
+	....
+	tier
+		unix t1
+	
+	SELECT DISTINCT name FROM info WHERE status = 1 ORDER BY id
+Select one row without duplicate entries
+
+
+bracnehs
+tier
+complex
+others
+
+
+SELECT category FROM products WHERE category IS NOT NULL; – TO SHOW cat/TIER/others
+
