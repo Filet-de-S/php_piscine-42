@@ -1,1 +1,1 @@
-SELECT count(*) AS 'movies' FROM film WHERE last_projection BETWEEN '2006/10/30' AND '2007/07/27' OR DAY(last_projection) = 24 AND MONTH(last_projection) = 12;
+SELECT count(*) AS 'movies' FROM member_history WHERE DATE(`date`) BETWEEN '2006/10/30' AND '2007/07/27' OR DAY(date) = 24 AND MONTH(date) = 12;
