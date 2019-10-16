@@ -1,0 +1,12 @@
+
+<- Vertex ----------------------------------------------------------------------
+The Vertex class handles 'x', 'y', 'z' coordinates, as well as two optional:
+	'w' stands for homogenous coordinates, by default 1.0,
+	'color' stands for instance of Color class, that represents RGB colors 
+		see (Color.doc.txt for more);
+		
+The constuctor expects an array of above variables;
+x, y, z are floats;
+
+Any wrong formats and values are undefined.
+---------------------------------------------------------------------- Vertex ->
