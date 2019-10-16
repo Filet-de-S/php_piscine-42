@@ -57,6 +57,14 @@ class Vertex {
 		$str = file_get_contents('Vertex.doc.txt');
 		return $str.PHP_EOL;
 	}
+
+	public function __get($name) {
+		return $this->$name;
+	}
+	
+	public function __set ($name, $value) {
+		$this->$name = $value;
+	} 
 }
 
 ?>

@@ -31,7 +31,7 @@ class Vertex {
 			else $this->_color =  new Color(array('rgb' => 0xffffff));
 		}
 		else
-			return ("x, y, z –– must present in array");
+			return FALSE;
 		if (self::$verbose == TRUE) {
 			printf("Vertex( x:%5.2f, y:%5.2f, z:%4.2f, w:%4.2f, %s ) constructed\n", $this->_x, 
 			$this->_y, $this->_z, $this->_w, $this->_color);
@@ -41,9 +41,9 @@ class Vertex {
 	public function __toString() {
 		if (self::$verbose == TRUE)
 			return sprintf("Vertex( x:%5.2f, y:%5.2f, z:%4.2f, w:%4.2f, %s )", $this->_x, 
-			$this->_y, $this->_z, $this->_w, $this->_color);
+				$this->_y, $this->_z, $this->_w, $this->_color);
 		return sprintf("Vertex( x:%5.2f, y:%5.2f, z:%4.2f, w:%4.2f )", $this->_x, 
-		$this->_y, $this->_z, $this->_w);
+			$this->_y, $this->_z, $this->_w);
 	}
 
 	public function __destruct() {
@@ -57,6 +57,14 @@ class Vertex {
 		$str = file_get_contents('Vertex.doc.txt');
 		return $str.PHP_EOL;
 	}
+
+	public function __get($name) {
+		return $this->$name;
+	}
+	
+	public function __set ($name, $value) {
+		$this->$name = $value;
+	} 
 }
 
 ?>

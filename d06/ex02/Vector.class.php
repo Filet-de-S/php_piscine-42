@@ -6,89 +6,99 @@ class Vector {
 	private $_x = 0;
 	private $_y = 0;
 	private $_z = 0;
-	private $_w = 0;
+	private $_w = 0.0;
 	public static $verbose = FALSE;
 
 	public function __construct (array $kwargs) {
-		if (array_key_exists('dest', $kwargs) == TRUE) {
-			$this->dest = $kwargs[dest];
+		if (array_key_exists('dest', $kwargs) == TRUE &&
+				array_key_exists('orig', $kwargs) == TRUE) {
+			$this->_x = $kwargs[dest]->_x - $kwargs[orig]->_x;
+			$this->_y = $kwargs[dest]->_y - $kwargs[orig]->_y;
+			$this->_z = $kwargs[dest]->_z - $kwargs[orig]->_z;
+			$this->_w = $kwargs[dest]->_w - $kwargs[orig]->_w;
+		}
+		elseif (array_key_exists('dest', $kwargs) == TRUE) {
+			$vtx = new Vertex(['x'=>0,'y'=>0,'z'=>0]);
+			$this->_x = $kwargs[dest]->_x;
+			$this->_y = $kwargs[dest]->_y;
+			$this->_z = $kwargs[dest]->_z;
+			$this->_w = 0;
 		}
 		else return FALSE;
-		if (array_key_exists('orig', $kwargs) == TRUE)
-			$this->orig = $kwargs[orig];
-		else $this->orig = new Vertex(['x'=> 0, 'y'=>0, 'z'=>0, 'w'=>1]);
 		if (self::$verbose == TRUE)
-			printf("Vector( x:%4.2f, y:%4.2f, z:%4.2f, w:%4.2f ) constructed\n",
-				$this->dest->_x, $this->dest->_y, $this->dest->_z, $this->dest->_w);
+			printf("$this constructed\n");
 	}
 
 	function magnitude() {
-		$vect = ['x'=>($this->dest->_x - $this->orig->_x), 'y'=>($this->dest->_y - $this->orig->_y),
-			'z'=>($this->dest->_z - $this->orig->_z)];
-		return (sqrt(pow($vect[x], 2) + pow($vect[y], 2) + pow($vect[z], 2)));
+		return (sqrt(pow($this->_x, 2) + pow($this->_y, 2) + pow($this->_z, 2)));
 	}
 
 	function normalize() {
-		$d  = sqrt(pow($vect[x], 2) + pow($vect[y], 2) + pow($vect[z], 2));
-		return (new Vector(['dest'=>['x'=> $this->orig->_x / $d, 'y'=>$this->orig->_y / $d,
-			'z'=>$this->orig->_z, 'w'=>$this->_w]]));
+		$d  = sqrt(pow($this->_x, 2) + pow($this->_y, 2) + pow($this->_z, 2));
+		$res =($this->_z / $d);
+		$vtx = new Vertex([ 'x' => ($this->_x / $d), 'y' => ($this->_y / $d), 'z' => ($this->_z / $d) ]);
+		return (new Vector (['dest' => $vtx]));
 	}
 
 	function add( Vector $rhs ) {
-		$sum[x] = $this->dest->_x + $rhs->dest->_x;
-		$sum[y] = $this->dest->_y + $rhs->dest->_y;
-		$sum[z] = $this->dest->_z + $rhs->dest->_z;
-		$sum[w] = $this->dest->_w + $rhs->dest->_w;
-		return (new Vector(['dest'=>$sum]));
+		$vtx = new Vertex(['x' => ($this->_x + $rhs->_x), 'y' => ($this->_y + $rhs->_y), 
+			'z' => ($this->_z + $rhs->_z)]);
+		return (new Vector(['dest'=> $vtx]));
 	}
 
 	function sub ( Vector $rhs ) {
-		$sub[x] = $this->dest->_x - $rhs->dest->_x;
-		$sub[y] = $this->dest->_y - $rhs->dest->_y;
-		$sub[z] = $this->dest->_z - $rhs->dest->_z;
-		$sub[w] = $this->dest->_w - $rhs->dest->_w;
-		return (new Vector(['dest'=>$sub]));
+		$x = $this->_x - $rhs->_x;
+		$y = $this->_y - $rhs->_y;
+		$z = $this->_z - $rhs->_z;
+		$sub = new Vertex(['x'=>$x, 'y'=>$y, 'z'=>$z]);
+		return (new Vector(['dest'=> $sub]));
 	}
 
 	function opposite() {
-		return (new Vector(['dest'=>['x'=> -($this->dest->_x), 'y'=>-($this->dest->_y),
-			'z'=>-($this->dest->_z), 'w'=>$this->dest->_w]]));
+		$vtx = new Vertex(['x' => -($this->_x), 'y' => -($this->_y), 'z' => -($this->_z), 'w' => ($this->_w)]);
+		return (new Vector(['dest' => $vtx]));
 	}
 
 	function scalarProduct( $k ) {
-		return (new Vector(['dest'=>['x'=>$this->dest->_x * $k, 'y'=>$this->dest->_y * $k,
-			'z'=>$this->dest->_z * $k, 'w'=>$this->dest->_w]]));
+		$vtx = new Vertex(['x'=>$this->_x * $k, 'y'=>$this->_y * $k, 'z'=>$this->_z * $k, 'w'=>$this->_w]);
+		return (new Vector(['dest'=> $vtx]));
 	}
 
 	function dotProduct( Vector $rhs ) {
-		$dot = ($this->dest->_x * $rhs->dest->_x) + ($this->dest->_y * $rhs->dest->_y)
-			+ ($this->dest->_z * $rhs->dest->_z);
+		$dot = ($this->_x * $rhs->_x) + ($this->_y * $rhs->_y)
+			+ ($this->_z * $rhs->_z);
 		return ($dot);
 	}
 
 	function cos( Vector $rhs ) {
-		$cos = ($this->dest->dotProduct($rhs)) / ($this->magnitude * $rhs->magnitude);
+		$cos = ($this->dotProduct($rhs)) / ($this->magnitude() * $rhs->magnitude());
 		return ($cos);
 	}
 
 	function crossProduct( Vector $rhs ) {
-		echo "v razrabotke.........";
+		$cross[x] = ($this->_y * $rhs->_z) - ($this->_z * $rhs->_y);
+		$cross[y] = ($this->_z * $rhs->_x) - ($this->_x * $rhs->_z);
+		$cross[z] = ($this->_x * $rhs->_y) - ($this->_y * $rhs->_x);
+		return (new Vector(['dest'=> new Vertex($cross)]));
 	}
 
 	public function __toString() {
 		return sprintf("Vector( x:%4.2f, y:%4.2f, z:%4.2f, w:%4.2f )",
-			$this->dest->_x, $this->dest->_y, $this->dest->_z, $this->dest->_w);
+			$this->_x, $this->_y, $this->_z, $this->_w);
 	}
 
-	public function __destructor() {
+	public function __destruct() {
 		if (self::$verbose == TRUE)
-			printf("Vector( x:%4.2f, y:%4.2f, z:%4.2f, w:%4.2f ) destructed\n",
-				$this->dest->_x, $this->dest->_y, $this->dest->_z, $this->dest->_w);
-	}
+			printf("$this destructed\n");
+		}
 
 	public static function doc() {
 		$str = file_get_contents('Vector.doc.txt');
 		return $str.PHP_EOL;
+	}
+
+	function __get($name) {
+		return ($this->$name);
 	}
 }
 

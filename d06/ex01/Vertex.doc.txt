@@ -9,4 +9,7 @@ The constuctor expects an array of above variables;
 x, y, z are floats;
 
 Any wrong formats and values are undefined.
+
+The class provide reading and writing assessors for its five attributes,
+please use __get & __set methods for this use.
 ---------------------------------------------------------------------- Vertex ->
