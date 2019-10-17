@@ -128,10 +128,10 @@ class Matrix {
 
 	function transformVertex( Vertex $vtx ) {
 		return (new Vertex([
-			'x'=> ($vtx->_x * $this->_vtcX->_x) + ($vtx->_y * $this->_vtcX->_y) + ($vtx->_z * $this->_vtcX->_z) + ($vtx->_w * $this->_vtxO->_w),
-			'y'=> ($vtx->_x * $this->_vtcY->_x + $vtx->_y * $this->_vtcY->_y + $vtx->_z * $this->_vtcY->_z + $vtx->_w * $this->_vtxO->_w),
-			'z'=> ($vtx->_x * $this->_vtcZ->_x + $vtx->_y * $this->_vtcZ->_y + $vtx->_z * $this->_vtcZ->_z + $vtx->_w * $this->_vtxO->_w),
-			'w'=> ($vtx->_w * $this->_vtxO->_x + $vtx->_y * $this->_vtxO->_y + $vtx->_z * $this->_vtxO->_z + $vtx->_w * $this->_vtxO->_w),
+			'x'=> ($vtx->_x * $this->_vtcX->_x) + ($vtx->_y * $this->_vtcY->_x) + ($vtx->_z * $this->_vtcZ->_x) + ($vtx->_w * $this->_vtxO->_x),
+			'y'=> ($vtx->_x * $this->_vtcX->_y + $vtx->_y * $this->_vtcY->_y + $vtx->_z * $this->_vtcZ->_y + $vtx->_w * $this->_vtxO->_y),
+			'z'=> ($vtx->_x * $this->_vtcX->_z + $vtx->_y * $this->_vtcY->_z + $vtx->_z * $this->_vtcZ->_z + $vtx->_w * $this->_vtxO->_z),
+			'w'=> ($vtx->_x * $this->_vtcX->_w + $vtx->_y * $this->_vtcY->_w + $vtx->_z * $this->_vtcZ->_w + $vtx->_w * $this->_vtxO->_w),
 		]));
 	}
 
