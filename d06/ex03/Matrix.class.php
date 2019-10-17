@@ -94,7 +94,7 @@ class Matrix {
 		else if ($kwargs[preset] == "")
 			$this->zeromatr();
 		else return FALSE;
-        if (self::$verbose == TRUE && $kwargs[preset != ""]) {
+        if (self::$verbose == TRUE && ($kwargs[preset] != "")) {
 			if ($kwargs[preset] == "IDENTITY")
 				printf("Matrix $kwargs[preset] instance constructed\n");
 			else
