@@ -1,0 +1,60 @@
+<html>
+<head>
+</head>
+
+<body>
+	
+	<form action="javascript:;" name='s4et4ik' onsubmit="myCalc()">
+			
+		<input type="number" name='num1' step="any" >
+		<select name="znak" form='calcu'>
+				<option value="+">+</option>
+				<option value="-">-</option>
+				<option value="*">*</option>
+				<option value="/">/</option>
+				<option value="%">%</option>
+		</select>
+		<input type="number" name='num2' step="any">
+		<button type=submit>
+			Try me!
+		</button>
+	</form>
+
+		<script>
+
+			setInterval(function() { alert('Please, use me...') }, 30000);
+
+			function myCalc() {
+			var num1 = parseFloat(document.getElementsByName('num1')[0].value);
+			var num2 = parseFloat(document.getElementsByName('num2')[0].value);
+			var znak = (document.getElementsByName('znak')[0].value);
+
+			if (num1 < 0 || num2 < 0) {
+				console.log('Error :(');
+				alert('Error :(');
+			}
+			else if (num2 == 0 && (znak == '%' || znak == "/")) {
+				console.log('It’s over 9000!');
+				alert("It’s over 9000!");
+			}
+			else {
+				var res;
+				switch(znak) {
+					case "+": res = num1+num2; break;
+					case "-": res = num1-num2; break;
+					case "*": res = num1*num2; break;
+					case "/": res = num1/num2; break;
+					case "%": res = num1%num2; break;
+				}
+				console.log(res);
+				alert(res);
+			}
+			};
+			
+			
+		</script>
+
+</div>
+
+</body>
+</html>

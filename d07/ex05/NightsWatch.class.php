@@ -4,12 +4,12 @@ class NightsWatch {
 	protected $_arr;
 
 	function recruit ($obj) {
-		$this->_arr[] = $obj;
+		if ($obj instanceof IFighter)
+			$this->_arr[] = $obj;
 	}
 	function fight() {
 		foreach ($this->_arr as $v) {
-			if ($v instanceof IFighter)
-				$v->fight();
+			$v->fight();
 		}
 	}
 }
